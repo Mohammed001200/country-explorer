@@ -1,13 +1,65 @@
 <!doctype html>
-<html lang="en">
+<html lang="sv">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>country-explorer</title>
+    <meta name="description" content="Utforska världens länder. Sök efter namn och filtrera på region för att hitta flaggor, huvudstäder och befolkning." />
+    <title>Country Explorer – utforska världens länder</title>
   </head>
   <body>
-    <div id="app"></div>
+    <a class="skip-link" href="#main">Hoppa till innehållet</a>
+    <header class="site-header">
+      <div class="container brand">
+        <span class="brand-icon" aria-hidden="true">◎</span>
+        <span>Country Explorer</span>
+      </div>
+    </header>
+
+    <main id="main" class="container" tabindex="-1">
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">UPPTÄCK VÄRLDEN</p>
+        <h1 id="page-title">Hela världen,<br />ett land i taget.</h1>
+        <p class="intro-text">Utforska flaggor, huvudstäder och befolkning. Sök efter ett land eller välj en region för att börja.</p>
+      </section>
+
+      <form id="filters" class="filters" role="search" aria-label="Sök och filtrera länder">
+        <div class="field search-field">
+          <label for="search">Sök efter land</label>
+          <input id="search" name="search" type="search" placeholder="Till exempel Sweden" aria-describedby="search-help" autocomplete="off" disabled />
+          <p id="search-help" class="field-help">Använd ländernas engelska namn.</p>
+        </div>
+        <div class="field">
+          <label for="region">Region</label>
+          <select id="region" name="region" disabled>
+            <option value="">Alla regioner</option>
+            <option value="Africa">Afrika</option>
+            <option value="Americas">Amerika</option>
+            <option value="Antarctic">Antarktis</option>
+            <option value="Asia">Asien</option>
+            <option value="Europe">Europa</option>
+            <option value="Oceania">Oceanien</option>
+          </select>
+        </div>
+        <button id="reset" type="button" class="button button-secondary" disabled>Rensa filter</button>
+      </form>
+
+      <section class="results" aria-labelledby="results-title" aria-busy="true">
+        <div class="results-header">
+          <h2 id="results-title">Länder och territorier</h2>
+          <p id="result-count"></p>
+        </div>
+        <p id="status" class="status" role="status" aria-live="polite" aria-atomic="true">Hämtar länder…</p>
+        <button id="retry" class="button" type="button" hidden>Försök igen</button>
+        <ul id="countries" class="country-grid" aria-label="Länder"></ul>
+      </section>
+      <noscript><p class="status">Aktivera JavaScript i webbläsaren för att hämta och söka bland länder.</p></noscript>
+    </main>
+
+    <footer class="container site-footer">
+      <p>En liten upptäcktsresa, direkt i din webbläsare.</p>
+      <p>Landdata: <a href="https://restcountries.conventus.de/">REST Countries via Conventus</a></p>
+    </footer>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
