@@ -6,11 +6,11 @@ import { filterCountries } from './filters.js'
 const countryList = document.querySelector('#countries')
 const status = document.querySelector('#status')
 const resultCount = document.querySelector('#result-count')
-const results = document.querySelector('.results')
 const filterForm = document.querySelector('#filters')
 const searchInput = document.querySelector('#search')
 const regionSelect = document.querySelector('#region')
 const resetButton = document.querySelector('#reset')
+const retryButton = document.querySelector('#retry')
 
 let countries = []
 
@@ -33,22 +33,48 @@ resetButton.addEventListener('click', () => {
   updateResults()
   searchInput.focus()
 })
+retryButton.addEventListener('click', loadCountries)
 
+function setFiltersDisabled(disabled) {
+  searchInput.disabled = disabled
+  regionSelect.disabled = disabled
+  resetButton.disabled = disabled
+}
+
+/** Fetch data and keep loading, empty-response, error and retry states usable. */
 async function loadCountries() {
+  const retryHadFocus = document.activeElement === retryButton
+  setFiltersDisabled(true)
+  retryButton.hidden = true
+  retryButton.disabled = true
+  countries = []
+  renderCountries(countryList, [])
+  resultCount.textContent = ''
+  status.classList.remove('is-error')
   status.textContent = 'Hämtar länder…'
-  results.setAttribute('aria-busy', 'true')
+  countryList.setAttribute('aria-busy', 'true')
 
   try {
     countries = await fetchCountries()
-    searchInput.disabled = false
-    regionSelect.disabled = false
-    resetButton.disabled = false
+    if (countries.length === 0) {
+      status.textContent = 'API:et returnerade inga länder. Försök igen om en stund.'
+      resultCount.textContent = '0 länder'
+      retryButton.hidden = false
+      return
+    }
+    setFiltersDisabled(false)
     updateResults()
   } catch {
     status.textContent = 'Länderna kunde inte hämtas. Kontrollera din internetanslutning och försök igen.'
     status.classList.add('is-error')
+    retryButton.hidden = false
   } finally {
-    results.setAttribute('aria-busy', 'false')
+    countryList.setAttribute('aria-busy', 'false')
+    retryButton.disabled = false
+    if (retryHadFocus) {
+      const nextControl = retryButton.hidden ? searchInput : retryButton
+      nextControl.focus()
+    }
   }
 }
 

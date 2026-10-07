@@ -44,14 +44,14 @@
         <button id="reset" type="button" class="button button-secondary" disabled>Rensa filter</button>
       </form>
 
-      <section class="results" aria-labelledby="results-title" aria-busy="true">
+      <section class="results" aria-labelledby="results-title">
         <div class="results-header">
           <h2 id="results-title">Länder och territorier</h2>
           <p id="result-count"></p>
         </div>
         <p id="status" class="status" role="status" aria-live="polite" aria-atomic="true">Hämtar länder…</p>
         <button id="retry" class="button" type="button" hidden>Försök igen</button>
-        <ul id="countries" class="country-grid" aria-label="Länder"></ul>
+        <ul id="countries" class="country-grid" aria-label="Länder" aria-busy="true"></ul>
       </section>
       <noscript><p class="status">Aktivera JavaScript i webbläsaren för att hämta och söka bland länder.</p></noscript>
     </main>
