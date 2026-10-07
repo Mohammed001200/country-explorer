@@ -8,7 +8,7 @@ const API_URL = 'https://restcountries.conventus.de/v3.1/all?fields=name,capital
  * @property {string[]} [capital]
  * @property {string} region
  * @property {number} [population]
- * @property {{png?: string}} [flags]
+ * @property {{svg?: string, png?: string}} [flags]
  */
 
 /**

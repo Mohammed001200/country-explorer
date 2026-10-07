@@ -32,7 +32,7 @@ function createCountryCard(country) {
   const flag = document.createElement('div')
   flag.className = 'flag'
   flag.textContent = 'Flagga saknas'
-  const flagUrl = country.flags?.png
+  const flagUrl = country.flags?.svg || country.flags?.png
 
   if (typeof flagUrl === 'string' && flagUrl.startsWith('https://')) {
     const image = document.createElement('img')

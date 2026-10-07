@@ -84,7 +84,7 @@ h2 { margin: 0; font-size: 21px; letter-spacing: -0.02em; }
 .country-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; list-style: none; margin: 0; padding: 0; }
 .country-card { height: 100%; overflow: hidden; border: 1px solid var(--border); border-radius: 10px; background: #fff; }
 .flag { height: 150px; display: grid; place-items: center; background: #edf1ed; color: var(--muted); font-size: 14px; }
-.flag img { width: 100%; height: 100%; object-fit: contain; }
+.flag img { display: block; width: 100%; height: 150px; object-fit: contain; }
 .card-body { padding: 20px; }
 .card-body h3 { margin: 0 0 16px; font-size: 19px; line-height: 1.35; overflow-wrap: anywhere; }
 .card-body dl { margin: 0; font-size: 13px; }
@@ -109,5 +109,5 @@ h2 { margin: 0; font-size: 21px; letter-spacing: -0.02em; }
   .field { flex-basis: 100%; }
   .button-secondary { margin-top: 0; width: 100%; }
   .country-grid { grid-template-columns: 1fr; }
-  .flag { height: 180px; }
+  .flag, .flag img { height: 180px; }
 }
